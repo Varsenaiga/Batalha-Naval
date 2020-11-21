@@ -1,16 +1,39 @@
-# This is a sample Python script.
+import numpy as np
+#from board import *
+from functions import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class bcolors:
+    WARNING = '\033[93m'
+    ENDC = '\033[0m'
+
+def main():
+    i = start_game()
+    i = 1 #definido pois para já não há outro gamemode
+    if i == 1:
+        TesteDrive()
+    elif i==2:
+        PvC()
+    elif i==2:
+        PvP()
+    elif i==2:
+        online()
+    else:
+        print("ERROR: não conhecido")
+        quit()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def start_game():
+    print("\t\u272E----------------------------------\u272E\n\t\u272EBem vindo ao Batalha Naval do NEEC\u272E\n\t\u272E----------------------------------\u272E\n")
+    while 1:
+        try:
+            user_input = input("\tEscolha do game mode:\n\t1.TesteDrive\t2.P vs C\t3.P vs P\t4.Online\n\tOu escolhe \"exit\".\n\t")
+            i = int(user_input)
+            if i > 4 or i < 1:
+              raise Exception()
+        except:
+            if(user_input=='exit'): quit()
+            print(f"{bcolors.WARNING}\tEscolha de gamemode não valida.{bcolors.ENDC}\n")
+        else:
+            return user_input
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+main()
