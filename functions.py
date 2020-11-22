@@ -8,7 +8,7 @@ MAX_rondas = 50
 # Para já vamos fazer a função que corresponde à criação de um taboleiro por parte do computador e o utilizador fica a adivinhar quais as posições dos barcos
 
 def TesteDrive():
-    counter_jogadas = 1;
+    counter_jogadas = 1
 
     check = True
 
@@ -88,7 +88,7 @@ def make_play(table_pc):
     while not valid:
         valid = True
         play =  input('Please choose the target coordinates: ')
-        if (len(play) != 2 and len(play) != 3) or not play[0].isalpha() or not play[1].isdigit() or play[0] not in letters or int(play[1:]) not in numbers:
+        if (len(play) != 2 and len(play) != 3) or not play[0].isalpha() or not play[1:].isdigit() or play[0] not in letters or int(play[1:]) not in numbers:
             valid = False
             print('Invalid input. Coordinates must be a letter (A-J) followed by a number (1-10).')
             continue
