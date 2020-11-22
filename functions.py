@@ -1,13 +1,14 @@
 from board import *
 import random
 
+MAX_rondas = 50
 
 ###############################################################################################
 # Estas funções são as funções correspondentes a cada modo de jogo
 # Para já vamos fazer a função que corresponde à criação de um taboleiro por parte do computador e o utilizador fica a adivinhar quais as posições dos barcos
 
 def TesteDrive():
-    counter_jogadas = 0;
+    counter_jogadas = 1;
 
     check = True
 
@@ -15,9 +16,10 @@ def TesteDrive():
     generate_board(tab)
     tab.print_tabuleiro()
 
-    print(f"{bcolors.OKBLUE}\tTabuleiro criado é a vez do jogador jogar.{bcolors.ENDC}\n")
+    print(f"{bcolors.OKBLUE}\tTabuleiro criado, é a vez do jogador jogar.{bcolors.ENDC}\n")
     while(check):
         make_play(tab)
+        print(f"\n\t{bcolors.HEADER}Balas restantes: {MAX_rondas-counter_jogadas}{bcolors.ENDC}")
         tab.print_tabuleiro()
         counter_jogadas += 1
         check = False
@@ -25,6 +27,22 @@ def TesteDrive():
             if i.state == True:
                 check = True
                 continue
+        if counter_jogadas > MAX_rondas and check == True:
+            print(f"{bcolors.FAIL}\n\tPerdeste o jogo. Não conseguiste acertar em todos os barcos antes das balas acabarem.{bcolors.ENDC}\n")
+            return 0
+
+    print(f"{bcolors.OKGREEN}\n\tParabéns venceste o jogo ainda com {MAX_rondas-counter_jogadas} rondas por jogar.{bcolors.ENDC}\n")
+    return 1
+
+
+def PvC():
+    print(f"{bcolors.FAIL}\tNão implementado.{bcolors.ENDC}\n")
+
+def PvP():
+    print(f"{bcolors.FAIL}\tNão implementado.{bcolors.ENDC}\n")
+
+def Online():
+    print(f"{bcolors.FAIL}\tNão implementado.{bcolors.ENDC}\n")
 
 
 ###############################################################################################
