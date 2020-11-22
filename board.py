@@ -19,7 +19,7 @@ class boat:
     def __init__(self, size, orientation, row, column, state):
         self.size = size
         self.orientation = orientation
-        self.pos = {row, column}
+        self.pos = (row, column)
         self.state = state
 
 
@@ -71,6 +71,45 @@ class tabuleiro:
             return False
 
 
+    def check_dead(self, boat1, final_pose):
+        for boat2 in self.boat_list:
+            if boat2 == boat1:
+                if boat2.orientation == 'vertical':
+                    for i in range(boat2.pos[0], final_pose):
+                        if self.data[i][boat2.pos[1]] == 'Boat':
+                            return False
+                elif boat2.orientation == 'horizontal':
+                    for i in range(boat2.pos[1], final_pose):
+                        if self.data[boat2.pos[0]][i] == 'Boat':
+                            return False
+                return True
+
+        return False
+
+
+    def check_boat(self, row, column):
+        for index, bt in enumerate(self.boat_list):
+            if bt.state:
+                if bt.orientation == 'vertical':
+                    final_pose = bt.pos[0] + bt.size
+                    for i in range(bt.pos[0], final_pose):
+                        if row == i and column == bt.pos[1]:
+                            if self.check_dead(bt, final_pose):
+                                self.boat_list[index].state = False
+                                return True
+                            else:
+                                return False
+                elif bt.orientation == 'horizontal':
+                    final_pose = bt.pos[1] + bt.size
+                    for i in range(bt.pos[1], final_pose):
+                        if row == bt.pos[0] and column == i:
+                            if self.check_dead(bt, final_pose):
+                                self.boat_list[index].state = False
+                                return True
+                            else:
+                                return False
+
+
     def shoot(self, row, column):
         if self.check_hit(row, column):
             if self.data[row, column] == 'Water':
@@ -78,6 +117,8 @@ class tabuleiro:
                 return 'Miss'
             elif self.data[row, column] == 'Boat':
                 self.data[row, column] = 'Hit'
+                if self.check_boat(row, column):
+                    print("Destroyed")
                 return 'Hit'
             else:
                 return 'error'
@@ -86,8 +127,8 @@ class tabuleiro:
 
 
     def insert_boat(self, row, column, size, orient):
-        self.boat_list.append(boat(size, orient, row, column, True))
         if self.check_water(row, column, size, orient):
+            self.boat_list.append(boat(size, orient, row, column, True))
             if orient == 'vertical':
                 final_pose = row + size
                 for i in range(row, final_pose):

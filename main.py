@@ -26,7 +26,7 @@ def start_game():
     print("\t\u272E----------------------------------\u272E\n\t\u272EBem vindo ao Batalha Naval do NEEC\u272E\n\t\u272E----------------------------------\u272E\n")
     while 1:
         try:
-            user_input = input("\tEscolha do game mode:\n\t1.TesteDrive\t2.P vs C\t3.P vs P\t4.Online\n\tOu escolhe \"exit\".\n\t")
+            user_input = input("\tEscolha do modo de jogo:\n\t1.TesteDrive\t2.P vs C\t3.P vs P\t4.Online\n\tOu escolhe \"exit\".\n\t")
             i = int(user_input)
             if i > 4 or i < 1:
               raise Exception()

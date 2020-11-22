@@ -21,9 +21,10 @@ def TesteDrive():
         tab.print_tabuleiro()
         counter_jogadas += 1
         check = False
-        for i in  tab.boat_list:
-            if i.state==True:
+        for i in tab.boat_list:
+            if i.state == True:
                 check = True
+                continue
 
 
 ###############################################################################################
