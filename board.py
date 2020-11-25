@@ -8,12 +8,14 @@ class bcolors:
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
+    BKGREY = '\033[48;5;246m'
+    BKBLUE = '\033[48;5;4m'
+    BKRED = '\033[48;5;9m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
 
 class boat:
     def __init__(self, size, orientation, row, column, state):
@@ -35,16 +37,19 @@ class tabuleiro:
         print(f"\n\tTabuleiro do {self.name}\n\t")
         string = "\t  A B C D E F G H I J"
         for i in range(Size_Board):
-            string += f"\n\t{i} "
+            if i < 9:
+                string += "\n\t " + str(i+1) + " "
+            else:
+                string += "\n\t" + str(i+1) + " "
             for k in range(Size_Board):
                 if(self.data[i, k] == 'Water'):
-                    string += f"{bcolors.OKCYAN}W {bcolors.ENDC}"
+                    string += bcolors.BKBLUE + " " + bcolors.ENDC + ' '
                 elif(self.data[i, k] == 'Boat'):
-                    string += f"{bcolors.OKCYAN}W {bcolors.ENDC}"
+                    string += bcolors.BKBLUE + " " + bcolors.ENDC + ' '
                 elif(self.data[i, k] == 'Hit'):
-                    string += f"{bcolors.FAIL}H {bcolors.ENDC}"
+                    string += bcolors.BKRED + " " + bcolors.ENDC + ' '
                 elif(self.data[i, k] == 'Miss'):
-                    string += f"M "
+                    string += bcolors.BKGREY + " " + bcolors.ENDC + ' '
 
         print(string)
 
