@@ -58,6 +58,41 @@ class tabuleiro:
         print(string)
 
 
+    def print_tabuleiro2(self, enemy):
+        print("\n\tTabuleiro do {}\t\t\tTabuleiro do {}\n\t".format(self.name, enemy.name))
+        string = "\t   A B C D E F G H I J\t\t   A B C D E F G H I J"
+        for i in range(Size_Board):
+            if i < 9:
+                string += "\n\t " + str(i+1) + " "
+            else:
+                string += "\n\t" + str(i+1) + " "
+            for k in range(Size_Board):
+                if(self.data[i, k] == 'Water'):
+                    string += "{}  {}".format(bcolors.BKBLUE, bcolors.ENDC)
+                elif(self.data[i, k] == 'Boat'):
+                    string += "{}- {}".format(bcolors.BKBROWN, bcolors.ENDC)
+                elif(self.data[i, k] == 'Hit'):
+                    string += "{}  {}".format(bcolors.BKRED, bcolors.ENDC)
+                elif(self.data[i, k] == 'Miss'):
+                    string += "{}  {}".format(bcolors.BKGREY, bcolors.ENDC)
+
+            if i < 9:
+                string += "\t\t " + str(i+1) + " "
+            else:
+                string += "\t\t" + str(i+1) + " "
+            for k in range(Size_Board):
+                if(enemy.data[i, k] == 'Water'):
+                    string += "{}  {}".format(bcolors.BKBLUE, bcolors.ENDC)
+                elif(enemy.data[i, k] == 'Boat'):
+                    string += "{}  {}".format(bcolors.BKBLUE, bcolors.ENDC)
+                elif(enemy.data[i, k] == 'Hit'):
+                    string += "{}  {}".format(bcolors.BKRED, bcolors.ENDC)
+                elif(enemy.data[i, k] == 'Miss'):
+                    string += "{}  {}".format(bcolors.BKGREY, bcolors.ENDC)
+
+        print(string)
+
+
     def check_water(self, row, column, size, orient):
         if orient == 'vertical':
             final_pose = row + size
@@ -127,7 +162,7 @@ class tabuleiro:
             elif self.data[row, column] == 'Boat':
                 self.data[row, column] = 'Hit'
                 if self.check_boat(row, column):
-                    print("\n\t{}Destroyed{}".format(bcolors.FAIL, bcolors.ENDC).center(23))
+                    return 'Destroyed'
                 return 'Hit'
             else:
                 return 'error'
