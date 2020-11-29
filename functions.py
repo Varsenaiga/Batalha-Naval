@@ -129,14 +129,13 @@ def generate_board(table):
                         play=play.upper()
                         column = letters.index(play[0])
                         row = numbers.index(int(play[1:]))
-                        print(f"{row} e {column}")
                         if orientation == 'V' or orientation == 'v':
-                            if row+i > Size_Board: row=row-i
+                            if row+i > Size_Board: row=row-i+1
                             if table.insert_boat(row, column, i, "vertical"):
                                 valid = True
                             else: print("\n\tJá existe um barco por baixo daquele que queres meter")
                         elif orientation == 'H' or orientation == 'h':
-                            while column+i > Size_Board: column=column-i
+                            while column+i > Size_Board: column=column-i+1
                             if table.insert_boat(row, column, i, "horizontal"):
                                 valid = True
                             else: print("\n\tJá existe um barco por baixo daquele que queres meter")
