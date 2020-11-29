@@ -35,7 +35,7 @@ class tabuleiro:
 
 
     def print_tabuleiro(self, typr_str):
-        print(f"\n\tTabuleiro do {self.name}\n\t")
+        print("\n\tTabuleiro do {}\n\t".format(self.name))
         string = "\t   A B C D E F G H I J"
         for i in range(Size_Board):
             if i < 9:
@@ -44,16 +44,16 @@ class tabuleiro:
                 string += "\n\t" + str(i+1) + " "
             for k in range(Size_Board):
                 if(self.data[i, k] == 'Water'):
-                    string += f"{bcolors.BKBLUE}  {bcolors.ENDC}"
+                    string += "{}  {}".format(bcolors.BKBLUE, bcolors.ENDC)
                 elif(self.data[i, k] == 'Boat'):
                     if typr_str == 'enemy':
-                        string += f"{bcolors.BKBLUE}  {bcolors.ENDC}"
+                        string += "{}  {}".format(bcolors.BKBLUE, bcolors.ENDC)
                     else:
-                        string += f"{bcolors.BKBROWN}- {bcolors.ENDC}"
+                        string += "{}- {}".format(bcolors.BKBROWN, bcolors.ENDC)
                 elif(self.data[i, k] == 'Hit'):
-                    string += f"{bcolors.BKRED}  {bcolors.ENDC}"
+                    string += "{}  {}".format(bcolors.BKRED, bcolors.ENDC)
                 elif(self.data[i, k] == 'Miss'):
-                    string += f"{bcolors.BKGREY}  {bcolors.ENDC}"
+                    string += "{}  {}".format(bcolors.BKGREY, bcolors.ENDC)
 
         print(string)
 
@@ -127,7 +127,7 @@ class tabuleiro:
             elif self.data[row, column] == 'Boat':
                 self.data[row, column] = 'Hit'
                 if self.check_boat(row, column):
-                    print("Destroyed")
+                    print("\n\t{}Destroyed{}".format(bcolors.FAIL, bcolors.ENDC).center(23))
                 return 'Hit'
             else:
                 return 'error'

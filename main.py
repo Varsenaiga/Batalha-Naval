@@ -32,7 +32,7 @@ def start_game():
               raise Exception()
         except:
             if(user_input=='exit'): quit()
-            print(f"{bcolors.WARNING}\tEscolha de gamemode não valida.{bcolors.ENDC}\n")
+            print("{}\tEscolha de gamemode não valida.{}\n".format(bcolors.WARNING, bcolors.ENDC))
         else:
             return i
 
