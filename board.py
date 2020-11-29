@@ -9,6 +9,7 @@ class bcolors:
     OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
     BKGREY = '\033[48;5;246m'
+    BKBROWN = '\033[48;5;166m'
     BKBLUE = '\033[48;5;4m'
     BKRED = '\033[48;5;9m'
     WARNING = '\033[93m'
@@ -33,9 +34,9 @@ class tabuleiro:
         self.boat_list = list()
 
 
-    def print_tabuleiro(self):
+    def print_tabuleiro(self, typr_str):
         print(f"\n\tTabuleiro do {self.name}\n\t")
-        string = "\t  A B C D E F G H I J"
+        string = "\t   A B C D E F G H I J"
         for i in range(Size_Board):
             if i < 9:
                 string += "\n\t " + str(i+1) + " "
@@ -43,13 +44,16 @@ class tabuleiro:
                 string += "\n\t" + str(i+1) + " "
             for k in range(Size_Board):
                 if(self.data[i, k] == 'Water'):
-                    string += bcolors.BKBLUE + " " + bcolors.ENDC + ' '
+                    string += f"{bcolors.BKBLUE}  {bcolors.ENDC}"
                 elif(self.data[i, k] == 'Boat'):
-                    string += bcolors.BKBLUE + " " + bcolors.ENDC + ' '
+                    if typr_str == 'enemy':
+                        string += f"{bcolors.BKBLUE}  {bcolors.ENDC}"
+                    else:
+                        string += f"{bcolors.BKBROWN}- {bcolors.ENDC}"
                 elif(self.data[i, k] == 'Hit'):
-                    string += bcolors.BKRED + " " + bcolors.ENDC + ' '
+                    string += f"{bcolors.BKRED}  {bcolors.ENDC}"
                 elif(self.data[i, k] == 'Miss'):
-                    string += bcolors.BKGREY + " " + bcolors.ENDC + ' '
+                    string += f"{bcolors.BKGREY}  {bcolors.ENDC}"
 
         print(string)
 
